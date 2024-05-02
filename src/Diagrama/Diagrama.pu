@@ -1,0 +1,66 @@
+@startuml a
+title "Diagrama de clases"
+
+package es/madrid/parla/tierno/equipo/src/diagrama{
+    package src/equipo/Controlador{
+        
+        interface Equipable{
+            + agregarJugador(jugador: Jugador): void
+            + eliminarJugador(dorsal: int): void
+            + jugarPartido(oficial: boolean): void
+            + obtenerResumenUltimoPartido(): String
+            + obtenerHistoricoTemporada(): String
+            + obtenerResumenJugador(dorsal: int): String
+        }
+
+    }
+
+
+    package src/equipo/modelo{
+        class Equipo{
+            - String: nombre
+            - jugador : List<jugador> 
+            - partidos : List<Partidos>
+        }
+
+        
+        class Jugador{
+            - String : tipos
+            - nombre: String
+            - dorsal: int
+            - habilidad: String
+            - String:altura
+            - puntos: int
+            - faltas: int
+        }
+
+        class Partidos{
+
+            - tipo: String {local u oficial}
+            - equipoLocal: Equipo
+            - equipoVisitante: Equipo
+
+            + calcularPuntos(): void
+            + calcularFaltas(): void
+
+
+        }
+
+
+    }
+
+
+    package src/equipo/Vista{
+        class App {}
+
+    }
+
+
+    Equipable <|.... Equipo
+    Jugador "tipos{base, escolta, alero, ala-pítot y pívot} --> 3 de cada tipo "....* "15 jugadores como maximo" Equipo 
+    Partidos ....o Equipo
+
+
+}
+
+@enduml
