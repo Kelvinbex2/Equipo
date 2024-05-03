@@ -6,21 +6,20 @@ import Controller.Equipable;
 import Entrada.Entrada;
 
 public class Equipo implements Equipable {
+
     private String nombre;
     private String tipo;
     private List<Jugador> jugadores;
     private List<Partidos> partidos;
-    private boolean jugarPartido;
 
     public Equipo() {
     }
 
     public Equipo(String nombre, String tipo) {
         this.nombre = nombre;
-        this.tipo = tipo;
+        setTipo(tipo);
         this.jugadores = new ArrayList<>();
         this.partidos = new ArrayList<>();
-        this.jugarPartido = true;
     }
 
     public String getNombre() {
@@ -47,19 +46,26 @@ public class Equipo implements Equipable {
         this.partidos = partidos;
     }
 
-    public boolean isJugarPartido() {
-        return jugarPartido;
-    }
-
-    public void setJugarPartido(boolean jugarPartido) {
-        this.jugarPartido = jugarPartido;
-    }
-
     public String getTipo() {
         return tipo;
     }
 
     public void setTipo(String tipo) {
+        String[] tipos = { "Local", "Visitante" };
+        System.out.println("Tipo de Equipo");
+        boolean hayTipo = false;
+
+        for (String tip : tipos) {
+            if (tipo.equalsIgnoreCase(tip)) {
+                hayTipo = true;
+                break;
+            }
+        }
+
+        if (!hayTipo) {
+            throw new IllegalArgumentException("El tipo de equipo solo puede ser Local o vistante" + tipo);
+        }
+
         this.tipo = tipo;
     }
 
@@ -77,70 +83,59 @@ public class Equipo implements Equipable {
 
     @Override
     public void jugarPartido() {
-        System.out.println("Quieres jugar");
-        String op = Entrada.leerString();
-
-        if (op.equalsIgnoreCase("Si")) {
-            obtenerResumen();
-            
-        }else{
-            System.out.println("Hasta la vista");
+        // Verificar si hay jugadores disponibles
+        if (jugadores.isEmpty()) {
+            System.out.println("No hay jugadores en el equipo para jugar el partido.");
+            return;
         }
+
+        // Confirmar si se desea jugar el partido
+        System.out.print("¿Quieres jugar el partido? (S/N): ");
+        String respuesta = Entrada.leerString();
+        if (!respuesta.equalsIgnoreCase("S")) {
+            System.out.println("No se jugará el partido. Hasta luego.");
+            return;
+        }
+
+        // Seleccionar equipo (Local o Visitante)
+        System.out.print("Selecciona tu equipo (Local/Visitante): ");
+        String equipoSeleccionado = Entrada.leerString();
+
+        // Simular el partido
+        System.out.println("¡El partido ha comenzado entre " + this.nombre + " y " + equipoSeleccionado + "!");
+        simularPartido();
+    }
+
+    private void simularPartido() {
+
+        for (Jugador jugador : jugadores) {
+            int puntos = jugador.getPuntos();
+            int faltas = jugador.getFaltas();
+            jugador.anotarPuntos(puntos);
+            jugador.incrementarFaltas(faltas);
+        }
+
+        System.out.println("¡El partido ha finalizado!");
+
+        // Mostrar resumen del partido
+        mostrarResumenPartido();
+    }
+
+    private void mostrarResumenPartido() {
+        System.out.println("Resumen del partido:");
+
+        for (Jugador jugador : jugadores) {
+            System.out.println("- Jugador: " + jugador.getNombre());
+            System.out.println("  Puntos: " + jugador.getPuntos());
+            System.out.println("  Faltas: " + jugador.getFaltas());
+        }
+        System.out.println("-------------------------");
     }
 
     @Override
     public void obtenerResumen() {
-        System.out.println("Tipo de partido (exhibición u oficiales): ");
-        String tipoPartido = Entrada.leerString();
-        String equipoSeleccionado = seleccionarEquipo();
-
-        boolean encontrado = false;
-
-        // Iterar sobre la lista de partidos para encontrar aquellos del tipo
-        // especificado
-        for (Partidos partido : partidos) {
-            if (partido.getTipo().equalsIgnoreCase(tipoPartido)) {
-                // Mostrar detalles del partido solo si coincide con el tipo de partido
-                encontrado = true;
-
-                // Mostrar resumen del partido
-                System.out.println("Resumen del partido (" + tipoPartido + "):");
-                System.out.println("Resultado: " + partido.getResultado());
-
-                // Mostrar detalles de los jugadores que participaron en este partido
-                System.out.println("Detalles de los jugadores:");
-                for (Jugador jugador : jugadores) {
-                    System.out.println("- Jugador: " + jugador.getNombre());
-                    System.out.println("  Puntos: " + jugador.getPuntos());
-                    System.out.println("  Faltas: " + jugador.getFaltas());
-                    System.out.println("Equipo: " + equipoSeleccionado);
-                }
-
-                System.out.println("-----------------------------------------");
-            }
-        }
-
-        if (!encontrado) {
-            System.out.println("No se encontraron partidos del tipo '" + tipoPartido + "'.");
-        }
-    }
-
-    private String seleccionarEquipo() {
-        System.out.println("Seleccionar equipo:");
-        System.out.println("1. Equipo Local");
-        System.out.println("2. Equipo Visitante");
-        System.out.print("Elegir uno: ");
-        String opcion = Entrada.leerString();
-
-        if (opcion.equals("1")) {
-            return "Local";
-        } else if (opcion.equals("2")) {
-            return "Visitante";
-        } else {
-            System.out.println("Opción inválida.");
-            
-        }
-        return opcion;
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'obtenerHistoricoTemporada'");
     }
 
     @Override
@@ -151,12 +146,22 @@ public class Equipo implements Equipable {
 
     @Override
     public void obtenerResumenJugador(int dorsal) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'obtenerResumenJugador'");
+        if (jugadores.isEmpty()) {
+            System.out.println("No hay jugadores disponibles");
+        }
+        for (Jugador jugador : jugadores) {
+            System.out.println("- Nombre: " + jugador.getNombre());
+            System.out.println("  Tipo  : " + jugador.getTipos());
+            System.out.println("  Dorsal  : " + jugador.getDorsal());
+            System.out.println("  Altura  : " + jugador.getAltura());
+            System.out.println("  Puntos  : " + jugador.getPuntos());
+            System.out.println("  habilidad  : " + jugador.getHabilidad());
+            System.out.println("  Puntos total de temporada  : " + jugador.getPuntos());
+
+        }
     }
 
     public void agregarPartido(Partidos partido) {
         partidos.add(partido);
     }
-
 }

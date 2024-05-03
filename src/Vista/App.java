@@ -12,19 +12,19 @@ public class App {
     static List<Equipo> equipos = new ArrayList<>();
     static List<Jugador> jugadores = new ArrayList<>();
     static Jugador j;
-
     static Equipo e;
 
     public static void crearMenu() {
 
         int op = 0;
-        
+
         do {
             System.out.println("1. Agregar Jugador");
             System.out.println("2. Eliminar Jugador");
-            System.out.println("3. Crear partido");
-            System.out.println("4. Jugar Partido");
+            System.out.println("3. Jugar Partido");
+            System.out.println("4. Mostrar resumen del  partido");
             System.out.println("5. Obtener Resumen");
+            System.out.println("6. Mostrar resumen");
             System.out.println("0. Salir");
 
             System.out.print("Elegir una opcion: ");
@@ -40,16 +40,18 @@ public class App {
                     break;
 
                 case 3:
-                    crearPartido();
+                    e.jugarPartido();
                     break;
 
                 case 4:
                     e.jugarPartido();
-                
+
                     break;
                 case 5:
 
                     e.obtenerResumen();
+                    break;
+                case 6:
                     break;
                 case 0:
                     System.out.println("Saliendo.....");
@@ -65,7 +67,7 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         e = new Equipo("kelvin", "Local");
-        j = new Jugador("ss", "1", 1, 1, 1);
+        j = new Jugador("base", "1", 1, 1, 1);
         e.agregarJugador(j);
         addEquipo(e);
         crearMenu();
@@ -125,15 +127,7 @@ public class App {
 
     }
 
-    public static void crearPartido() {
-
-        
-        System.out.print("Tipo : exhibición u oficiale : ");
-        String tipo = Entrada.leerString();
-        
-
-        Partidos pa = new Partidos(tipo);
-        e.agregarPartido(pa);
-    }
+    
+    
 
 }
