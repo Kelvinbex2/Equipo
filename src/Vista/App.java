@@ -92,7 +92,7 @@ public class App {
         int puntos = Entrada.leerEntero();
         System.out.print("Habilidad: ");
         int habilidad = Entrada.leerEntero();
-        while (habilidad < 1 || habilidad > 5) {
+        while (habilidad < 1 || habilidad > 4) {
             System.out.println("tiene que ser de un rango 1 a 5 ");
             System.out.print("Habilidad: ");
             habilidad = Entrada.leerEntero();

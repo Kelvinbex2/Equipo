@@ -3,7 +3,7 @@ title "Diagrama de clases"
 
 package es/madrid/parla/tierno/equipo/src/diagrama{
     package src/equipo/Controlador{
-        
+
         interface Equipable{
             + agregarJugador(jugador: Jugador): void
             + eliminarJugador(dorsal: int): void
@@ -19,13 +19,12 @@ package es/madrid/parla/tierno/equipo/src/diagrama{
     package src/equipo/modelo{
         class Equipo{
             - String: nombre
-            - jugador : List<jugador> 
+            - jugador : List<jugador>
             - partidos : List<Partidos>
         }
 
-        
+
         class Jugador{
-            - String : tipos
             - nombre: String
             - dorsal: int
             - habilidad: String
@@ -33,6 +32,32 @@ package es/madrid/parla/tierno/equipo/src/diagrama{
             - puntos: int
             - faltas: int
         }
+        class Alapivot extends Jugador{
+
+        }
+
+        class Alero extends Jugador{
+
+        }
+
+        class Base extends Jugador{
+
+        }
+
+        class Escota extends Jugador{
+
+        }
+
+        class Pivot extends Jugador{
+
+        }
+
+
+        class FactoriaJugador(){
+            + crearJugado( altura: String, habilidad: String): Jugador
+                
+        }
+
 
         class Partidos{
 
@@ -57,7 +82,7 @@ package es/madrid/parla/tierno/equipo/src/diagrama{
 
 
     Equipable <|.... Equipo
-    Jugador "tipos{base, escolta, alero, ala-pítot y pívot} --> 3 de cada tipo "....* "15 jugadores como maximo" Equipo 
+    Jugador ....*  Equipo
     Partidos ....o Equipo
 
 
