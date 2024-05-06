@@ -83,53 +83,7 @@ public class Equipo implements Equipable {
 
     @Override
     public void jugarPartido() {
-        // Verificar si hay jugadores disponibles
-        if (jugadores.isEmpty()) {
-            System.out.println("No hay jugadores en el equipo para jugar el partido.");
-            return;
-        }
 
-        // Confirmar si se desea jugar el partido
-        System.out.print("¿Quieres jugar el partido? (S/N): ");
-        String respuesta = Entrada.leerString();
-        if (!respuesta.equalsIgnoreCase("S")) {
-            System.out.println("No se jugará el partido. Hasta luego.");
-            return;
-        }
-
-        // Seleccionar equipo (Local o Visitante)
-        System.out.print("Selecciona tu equipo (Local/Visitante): ");
-        String equipoSeleccionado = Entrada.leerString();
-
-        // Simular el partido
-        System.out.println("¡El partido ha comenzado entre " + this.nombre + " y " + equipoSeleccionado + "!");
-        simularPartido();
-    }
-
-    private void simularPartido() {
-
-        for (Jugador jugador : jugadores) {
-            int puntos = jugador.getPuntos();
-            int faltas = jugador.getFaltas();
-            jugador.anotarPuntos(puntos);
-            jugador.incrementarFaltas(faltas);
-        }
-
-        System.out.println("¡El partido ha finalizado!");
-
-        // Mostrar resumen del partido
-        mostrarResumenPartido();
-    }
-
-    private void mostrarResumenPartido() {
-        System.out.println("Resumen del partido:");
-
-        for (Jugador jugador : jugadores) {
-            System.out.println("- Jugador: " + jugador.getNombre());
-            System.out.println("  Puntos: " + jugador.getPuntos());
-            System.out.println("  Faltas: " + jugador.getFaltas());
-        }
-        System.out.println("-------------------------");
     }
 
     @Override
@@ -145,19 +99,22 @@ public class Equipo implements Equipable {
     }
 
     @Override
-    public void obtenerResumenJugador(int dorsal) {
+    public void obtenerResumenJugador() {
         if (jugadores.isEmpty()) {
             System.out.println("No hay jugadores disponibles");
         }
-        for (Jugador jugador : jugadores) {
-            System.out.println("- Nombre: " + jugador.getNombre());
-            System.out.println("  Tipo  : " + jugador.getTipos());
-            System.out.println("  Dorsal  : " + jugador.getDorsal());
-            System.out.println("  Altura  : " + jugador.getAltura());
-            System.out.println("  Puntos  : " + jugador.getPuntos());
-            System.out.println("  habilidad  : " + jugador.getHabilidad());
-            System.out.println("  Puntos total de temporada  : " + jugador.getPuntos());
-
+        for (Jugador j : jugadores) {
+            if (j instanceof AlaPitot) {
+                ((AlaPitot) j).informacion();
+            } else if (j instanceof Alero) {
+                ((Alero) j).informacion();
+            } else if (j instanceof Pivot) {
+                ((Pivot) j).informacion();
+            } else if (j instanceof Base) {
+                ((Base) j).informacion();
+            } else if (j instanceof Escota) {
+                ((Escota) j).informacion();
+            }
         }
     }
 
