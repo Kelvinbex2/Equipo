@@ -1,21 +1,15 @@
 package Vista;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import Controller.FactoriaJugador;
-import Controller.FactoryPartidos;
 import Entrada.Entrada;
 import Modelo.AlaPitot;
 import Modelo.Alero;
 import Modelo.Base;
 import Modelo.Equipo;
 import Modelo.Escota;
-import Modelo.Exhibicion;
 import Modelo.Jugador;
-import Modelo.Oficial;
-import Modelo.Partidos;
 import Modelo.Pivot;
 
 public class App {
