@@ -31,17 +31,6 @@ public abstract class Partidos {
         this.fecha = fecha;
     }
 
-    public void posibilidad() {
-        if ((this.getPuntos() >= 70) && this.getPuntos() <= 100) {
-            this.setPuntos(this.getPuntos() + 10);
-        } else {
-            this.setPuntos(this.getPuntos() - 1);
-        }
+   
 
-    }
-
-    @Override
-    public String toString() {
-        return "Puntos=" + puntos +  ", Fecha=" + fecha ;
-    }
 }

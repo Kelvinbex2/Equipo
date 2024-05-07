@@ -6,8 +6,8 @@ public class Alero extends Jugador {
         
     }
 
-    public Alero(String nombre, int dorsal, int habilidad, int altura, int puntos) {
-        super(nombre, dorsal, habilidad, altura, puntos);
+    public Alero(String nombre, int dorsal, int habilidad, int altura) {
+        super(nombre, dorsal, habilidad, altura);
     }
 
     @Override

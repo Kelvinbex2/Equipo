@@ -6,8 +6,8 @@ public class Escota extends Jugador {
         
     }
 
-    public Escota(String nombre, int dorsal, int habilidad, int altura, int puntos) {
-        super(nombre, dorsal, habilidad, altura, puntos);
+    public Escota(String nombre, int dorsal, int habilidad, int altura) {
+        super(nombre, dorsal, habilidad, altura );
     }
 
     @Override

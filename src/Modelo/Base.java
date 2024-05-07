@@ -6,8 +6,8 @@ public class Base extends Jugador {
         
     }
 
-    public Base(String nombre, int dorsal, int habilidad, int altura, int puntos) {
-        super(nombre, dorsal, habilidad, altura, puntos);
+    public Base(String nombre, int dorsal, int habilidad, int altura) {
+        super(nombre, dorsal, habilidad, altura);
     }
 
     @Override

@@ -73,7 +73,7 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         e = new Equipo("kelvin", "Local");
-        j = new Base("kelvin", 1, 1, 1, 1);
+        j = new Base("kelvin", 1, 1, 1);
        // p = new Oficial(crearDate());
        // e.agregarPartido(p);
         e.agregarJugador(j);

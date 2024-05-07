@@ -3,6 +3,8 @@ package Modelo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 import Controller.Equipable;
 import Controller.FactoryPartidos;
 import Entrada.Entrada;
@@ -85,26 +87,25 @@ public class Equipo implements Equipable {
 
     @Override
     public void jugarPartido() {
-        System.out.println("Quiers jugar: S/N");
+        System.out.println("¿Quieres jugar un partido? (S/N)");
         String op = Entrada.leerString();
-        int valid = crearPartido();
 
         if (op.equalsIgnoreCase("S")) {
+            int valid = crearPartido();
 
             if (valid == 1) {
-                System.out.println("somos equipo local: < S/N> : ");
+                System.out.println("¿Somos equipo local? (S/N)");
                 String op2 = Entrada.leerString();
+
                 if (op2.equalsIgnoreCase("S")) {
-                    simularPartido();
+                    
+                } else {
 
                 }
-
             }
-
         } else {
             System.out.println("Hasta luego");
         }
-
     }
 
     @Override
@@ -112,8 +113,8 @@ public class Equipo implements Equipable {
         for (Partidos partido : partidos) {
             if (partidos.isEmpty()) {
                 System.out.println("No hay parditos hoy");
-            }else if(partido instanceof Oficial){
-                    ((Oficial)partido).toString();
+            } else if (partido instanceof Oficial) {
+                System.out.println(((Oficial) partido).toString());
             }
         }
 
@@ -151,7 +152,7 @@ public class Equipo implements Equipable {
 
     public int crearPartido() {
         Partidos p;
-        System.out.print("Elegir opcion: \n1.Oficial  \n2.Exhibicion ");
+        System.out.print("1.Oficial  \n2.Exhibicion \nElegir opcion:");
         int tipo = Entrada.leerEntero();
         if (tipo == 1) {
             p = FactoryPartidos.crearPartido(tipo);
@@ -178,12 +179,18 @@ public class Equipo implements Equipable {
         return LocalDate.of(anio, mes, dia);
     }
 
-    public void simularPartido() {
-        Partidos p = new Partidos() {
-        };
-        p.posibilidad();
-    }
+   
 
     
+
+    private void mostrarResumenJugadores() {
+
+        System.out.println("Resumen de puntos y faltas por jugador:");
+        for (Jugador jugador : jugadores) {
+
+            System.out.println("Nombre - " + jugador.getNombre() + " Puntos " + jugador.getPuntos() + ", Faltas: "
+                    + jugador.getFaltas());
+        }
+    }
 
 }

@@ -8,8 +8,8 @@ public class AlaPitot extends Jugador {
     }
 
 
-    public AlaPitot(String nombre, int dorsal, int habilidad, int altura, int puntos) {
-        super(nombre, dorsal, habilidad, altura, puntos);
+    public AlaPitot(String nombre, int dorsal, int habilidad, int altura) {
+        super(nombre, dorsal, habilidad, altura);
     }
 
     @Override

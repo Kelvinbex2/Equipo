@@ -1,5 +1,7 @@
 package Modelo;
 
+
+
 public abstract class Jugador {
 
     private String nombre;
@@ -13,12 +15,13 @@ public abstract class Jugador {
     public Jugador() {
     }
 
-    public Jugador(String nombre, int dorsal, int habilidad, int altura, int puntos) {
+    public Jugador(String nombre, int dorsal, int habilidad, int altura) {
+
         this.nombre = nombre;
         this.dorsal = dorsal;
         this.habilidad = habilidad;
         this.altura = altura;
-        this.puntos = puntos;
+        this.puntos = (int) (10 + (Math.random() * (50 - 10 + 1)));
         this.faltas = (int) (1 + (Math.random() * (5 - 1 + 1)));
         cantidadJugadores++;
 

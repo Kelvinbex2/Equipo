@@ -7,8 +7,8 @@ public class Pivot extends Jugador {
         
     }
 
-    public Pivot(String nombre, int dorsal, int habilidad, int altura, int puntos) {
-        super(nombre, dorsal, habilidad, altura, puntos);
+    public Pivot(String nombre, int dorsal, int habilidad, int altura) {
+        super(nombre, dorsal, habilidad, altura);
     }
 
     @Override
