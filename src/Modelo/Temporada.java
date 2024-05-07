@@ -2,8 +2,6 @@ package Modelo;
 
 import java.util.Stack;
 
-import Entrada.Entrada;
-
 public class Temporada {
     Stack <Partidos> partido = new Stack<>();
 

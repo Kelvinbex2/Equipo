@@ -26,12 +26,10 @@ public class App {
             System.out.println("1. Agregar Jugador");
             System.out.println("2. Eliminar Jugador");
             System.out.println("3. Jugar Partido");
-            System.out.println("4. Crear Partidp");
-            System.out.println("5. Mostrar resumen del  partido");
-            System.out.println("6. Obtener Resumen");
-            System.out.println("7. Mostrar resumen Jugador");
+            System.out.println("4. Mostrar resumen del  partido");
+            System.out.println("5. Obtener Resumen");
+            System.out.println("6. Mostrar resumen Jugador");
             System.out.println("0. Salir");
-
             System.out.print("Elegir una opcion: ");
             op = Entrada.leerEntero();
 

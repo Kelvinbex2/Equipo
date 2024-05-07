@@ -92,21 +92,39 @@ public class Equipo implements Equipable {
 
         if (op.equalsIgnoreCase("S")) {
             int valid = crearPartido();
+            Partidos p = obtPartidos(valid);
 
-            if (valid == 1) {
+            if (p != null) {
                 System.out.println("¿Somos equipo local? (S/N)");
                 String op2 = Entrada.leerString();
 
                 if (op2.equalsIgnoreCase("S")) {
-                    
-                } else {
+                    // Validar el puntaje del partido para simulación local
+                    int puntosPartido = p.getPuntos();
+                    if (puntosPartido >= 35 && puntosPartido <= 150) {
+                        int resultadoSimulado = simularLocal();
 
+                        System.out.println("Resultado simulado del partido: " + resultadoSimulado);
+
+                        // Actualizar puntos de los jugadores basados en el resultado simulado
+                        actualizarPuntosJugadores(resultadoSimulado);
+
+                        System.out.println("----------------");
+                        mostrarResumenJugadores(p.getFecha());
+                    } else {
+                        System.out.println("El puntaje del partido no es adecuado para simular como equipo local.");
+                    }
+                } else {
+                    
+                    System.out.println("Simulación como equipo visitante (a implementar).");
                 }
             }
         } else {
             System.out.println("Hasta luego");
         }
     }
+
+   
 
     @Override
     public void obtenerResumen() {
@@ -150,23 +168,7 @@ public class Equipo implements Equipable {
         partidos.add(partido);
     }
 
-    public int crearPartido() {
-        Partidos p;
-        System.out.print("1.Oficial  \n2.Exhibicion \nElegir opcion:");
-        int tipo = Entrada.leerEntero();
-        if (tipo == 1) {
-            p = FactoryPartidos.crearPartido(tipo);
-            agregarPartido(p);
-        } else {
-            p = FactoryPartidos.crearPartido(tipo);
-            agregarPartido(p);
-        }
-        LocalDate date = crearDate();
-
-        p.setFecha(date);
-        return tipo;
-
-    }
+    
 
     public LocalDate crearDate() {
         System.out.print("Anio:");
@@ -179,18 +181,54 @@ public class Equipo implements Equipable {
         return LocalDate.of(anio, mes, dia);
     }
 
-   
+//////// metodos para Jugar un partido
 
-    
+public int crearPartido() {
+    System.out.println("1. Oficial");
+    System.out.println("2. Exhibición");
+    System.out.print("Elige una opción: ");
+    int tipo = Entrada.leerEntero();
 
-    private void mostrarResumenJugadores() {
+    Partidos p = FactoryPartidos.crearPartido(tipo);
+    agregarPartido(p);
 
+    LocalDate date = crearDate();
+    p.setFecha(date);
+
+    return tipo;
+}
+
+
+    private Partidos obtPartidos(int opc) {
+        return FactoryPartidos.crearPartido(opc);
+    }
+
+    private void mostrarResumenJugadores(LocalDate localDate) {
         System.out.println("Resumen de puntos y faltas por jugador:");
         for (Jugador jugador : jugadores) {
-
-            System.out.println("Nombre - " + jugador.getNombre() + " Puntos " + jugador.getPuntos() + ", Faltas: "
+            System.out.println("Nombre: " + jugador.getNombre() + ", Puntos " + jugador.getPuntos() + ", Faltas: "
                     + jugador.getFaltas());
         }
+
     }
+
+    private int simularLocal() {
+        Random random = new Random();
+
+        if (random.nextDouble() < 0.7) {
+            return random.nextInt(31) + 70;
+        } else {
+            return random.nextInt(16) + 35;
+        }
+    }
+
+
+    private void actualizarPuntosJugadores(int resultadoSimulado) {
+        for (Jugador jugador : jugadores) {
+            jugador.setPuntos(jugador.getPuntos() + resultadoSimulado);
+        }
+    }
+
+    ////////////////////////////////////////////////
 
 }
