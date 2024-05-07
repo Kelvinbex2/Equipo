@@ -1,4 +1,11 @@
-package Modelo;
+package Controller;
+
+import Modelo.AlaPitot;
+import Modelo.Alero;
+import Modelo.Base;
+import Modelo.Escota;
+import Modelo.Jugador;
+import Modelo.Pivot;
 
 public class FactoriaJugador {
     static int base = 0;

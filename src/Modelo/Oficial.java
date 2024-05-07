@@ -1,10 +1,34 @@
 package Modelo;
 
-public class Oficial extends Partidos{
+import java.time.LocalDate;
 
-    public Oficial(String tipo) {
-        super(tipo);
-        //TODO Auto-generated constructor stub
+public class Oficial extends Partidos {
+    private boolean esLocal;
+
+    public Oficial() {
+        
     }
-    
+
+    public Oficial(LocalDate fecha) {
+
+        super(fecha);
+        this.esLocal = true;
+
+    }
+
+    // crear constructor vacio
+
+    public boolean isEsLocal() {
+        return esLocal;
+    }
+
+    public void setEsLocal(boolean esLocal) {
+        this.esLocal = esLocal;
+    }
+
+    @Override
+    public String toString() {
+        return "Oficial{" + "esLocal=" + esLocal + ", fecha=" + getFecha() + "Puntos" + getPuntos();
+    }
+
 }

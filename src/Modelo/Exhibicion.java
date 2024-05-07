@@ -1,10 +1,14 @@
 package Modelo;
 
-public class Exhibicion extends Partidos{
+import java.time.LocalDate;
 
-    public Exhibicion(String tipo) {
-        super(tipo);
+public class Exhibicion extends Partidos{
+    public Exhibicion(){}
+
+    public Exhibicion(LocalDate fecha) {
+        super(fecha);
         //TODO Auto-generated constructor stub
     }
+    
     
 }

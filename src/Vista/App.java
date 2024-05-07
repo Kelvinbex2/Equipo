@@ -1,22 +1,28 @@
 package Vista;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import Controller.FactoriaJugador;
+import Controller.FactoryPartidos;
 import Entrada.Entrada;
 import Modelo.AlaPitot;
 import Modelo.Alero;
 import Modelo.Base;
 import Modelo.Equipo;
 import Modelo.Escota;
-import Modelo.FactoriaJugador;
+import Modelo.Exhibicion;
 import Modelo.Jugador;
+import Modelo.Oficial;
+import Modelo.Partidos;
 import Modelo.Pivot;
 
 public class App {
     static List<Equipo> equipos = new ArrayList<>();
     static Jugador j;
     static Equipo e;
+   // static Partidos p;
 
     public static void crearMenu() {
 
@@ -26,9 +32,10 @@ public class App {
             System.out.println("1. Agregar Jugador");
             System.out.println("2. Eliminar Jugador");
             System.out.println("3. Jugar Partido");
-            System.out.println("4. Mostrar resumen del  partido");
-            System.out.println("5. Obtener Resumen");
-            System.out.println("6. Mostrar resumen Jugador");
+            System.out.println("4. Crear Partidp");
+            System.out.println("5. Mostrar resumen del  partido");
+            System.out.println("6. Obtener Resumen");
+            System.out.println("7. Mostrar resumen Jugador");
             System.out.println("0. Salir");
 
             System.out.print("Elegir una opcion: ");
@@ -48,7 +55,7 @@ public class App {
                     break;
 
                 case 4:
-                    // mostrarres;
+                   e.obtenerResumen();
 
                     break;
                 case 5:
@@ -70,8 +77,11 @@ public class App {
     }
 
     public static void main(String[] args) throws Exception {
+
         e = new Equipo("kelvin", "Local");
         j = new Base("kelvin", 1, 1, 1, 1);
+       // p = new Oficial(crearDate());
+       // e.agregarPartido(p);
         e.agregarJugador(j);
         addEquipo(e);
         crearMenu();
@@ -147,7 +157,7 @@ public class App {
                 break;
 
             }
-           
+
         }
 
         if (!exist) {
@@ -155,5 +165,9 @@ public class App {
         }
 
     }
+
+  
+
+   
 
 }

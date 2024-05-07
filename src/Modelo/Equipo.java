@@ -1,8 +1,10 @@
 package Modelo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import Controller.Equipable;
+import Controller.FactoryPartidos;
 import Entrada.Entrada;
 
 public class Equipo implements Equipable {
@@ -83,13 +85,38 @@ public class Equipo implements Equipable {
 
     @Override
     public void jugarPartido() {
+        System.out.println("Quiers jugar: S/N");
+        String op = Entrada.leerString();
+        int valid = crearPartido();
+
+        if (op.equalsIgnoreCase("S")) {
+
+            if (valid == 1) {
+                System.out.println("somos equipo local: < S/N> : ");
+                String op2 = Entrada.leerString();
+                if (op2.equalsIgnoreCase("S")) {
+                    simularPartido();
+
+                }
+
+            }
+
+        } else {
+            System.out.println("Hasta luego");
+        }
 
     }
 
     @Override
     public void obtenerResumen() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'obtenerHistoricoTemporada'");
+        for (Partidos partido : partidos) {
+            if (partidos.isEmpty()) {
+                System.out.println("No hay parditos hoy");
+            }else if(partido instanceof Oficial){
+                    ((Oficial)partido).toString();
+            }
+        }
+
     }
 
     @Override
@@ -121,4 +148,42 @@ public class Equipo implements Equipable {
     public void agregarPartido(Partidos partido) {
         partidos.add(partido);
     }
+
+    public int crearPartido() {
+        Partidos p;
+        System.out.print("Elegir opcion: \n1.Oficial  \n2.Exhibicion ");
+        int tipo = Entrada.leerEntero();
+        if (tipo == 1) {
+            p = FactoryPartidos.crearPartido(tipo);
+            agregarPartido(p);
+        } else {
+            p = FactoryPartidos.crearPartido(tipo);
+            agregarPartido(p);
+        }
+        LocalDate date = crearDate();
+
+        p.setFecha(date);
+        return tipo;
+
+    }
+
+    public LocalDate crearDate() {
+        System.out.print("Anio:");
+        int anio = Entrada.leerEntero();
+        System.out.print("Mes:");
+        int mes = Entrada.leerEntero();
+        System.out.print("Dia:");
+        int dia = Entrada.leerEntero();
+
+        return LocalDate.of(anio, mes, dia);
+    }
+
+    public void simularPartido() {
+        Partidos p = new Partidos() {
+        };
+        p.posibilidad();
+    }
+
+    
+
 }

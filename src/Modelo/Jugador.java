@@ -13,7 +13,7 @@ public abstract class Jugador {
     public Jugador() {
     }
 
-    public Jugador( String nombre, int dorsal, int habilidad, int altura, int puntos) {
+    public Jugador(String nombre, int dorsal, int habilidad, int altura, int puntos) {
         this.nombre = nombre;
         this.dorsal = dorsal;
         this.habilidad = habilidad;
@@ -23,7 +23,6 @@ public abstract class Jugador {
         cantidadJugadores++;
 
     }
-
 
     public String getNombre() {
         return nombre;
@@ -87,7 +86,8 @@ public abstract class Jugador {
     public void incrementarFaltas(int faltas) {
         this.faltas += faltas;
     }
-    public void informacion(){
+
+    public void informacion() {
 
     }
 
