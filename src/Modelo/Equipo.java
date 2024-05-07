@@ -136,7 +136,7 @@ public class Equipo implements Equipable {
     public void obtenerResumen() {
         for (Partidos partido : partidos) {
             if (partidos.isEmpty()) {
-                System.out.println("No hay parditos hoy");
+                System.out.println("\nNo hay parditos hoy\n");
             } else if (partido instanceof Oficial) {
                 System.out.println(((Oficial) partido).toString());
             }
@@ -153,7 +153,7 @@ public class Equipo implements Equipable {
     @Override
     public void obtenerResumenJugador() {
         if (jugadores.isEmpty()) {
-            System.out.println("No hay jugadores disponibles");
+            System.out.println("\nNo hay jugadores disponibles\n");
         }
         boolean found=false;
         System.out.print("Escribe el nombre a Mostrar:");
