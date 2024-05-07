@@ -8,7 +8,7 @@ import Modelo.Jugador;
 import Modelo.Pivot;
 
 public class FactoriaJugador {
-   
+    private static final int MAX_POR_TIPO = 3;
 
     public static Jugador crearJugador(int habilidad, int altura) {
         if (altura < 180 && habilidad >= 4) {
