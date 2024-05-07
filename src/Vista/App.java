@@ -1,4 +1,5 @@
 package Vista;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class App {
     static List<Equipo> equipos = new ArrayList<>();
     static Jugador j;
     static Equipo e;
-   // static Partidos p;
+    // static Partidos p;
 
     public static void crearMenu() {
 
@@ -47,7 +48,7 @@ public class App {
                     break;
 
                 case 4:
-                   e.obtenerResumen();
+                    e.obtenerResumen();
 
                     break;
                 case 5:
@@ -71,10 +72,17 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         e = new Equipo("kelvin", "Local");
-        j = new Base("kelvin", 1, 1, 1);
-       // p = new Oficial(crearDate());
-       // e.agregarPartido(p);
+        Jugador o = new Base("kelvin", 1, 4, 180);
+        j = new Base("kelvin", 1, 4, 180);
+        Jugador s = new Base("kelvin", 1, 4, 180);
+        Jugador i = new Base("kelvin", 1, 4, 180);
+
+        // p = new Oficial(crearDate());
+        // e.agregarPartido(p);
         e.agregarJugador(j);
+        e.agregarJugador(i);
+        e.agregarJugador(o);
+        e.agregarJugador(s);
         addEquipo(e);
         crearMenu();
 
@@ -88,10 +96,9 @@ public class App {
 
         System.out.print("Nombre: ");
         String nombre = Entrada.leerString();
+        e.comprobar(nombre);// lanzar una excepcion si el nombre existe ya en el array de jugador
         System.out.print("Dorsal: ");
         int dors = Entrada.leerEntero();
-        System.out.print("Puntos: ");
-        int puntos = Entrada.leerEntero();
         System.out.print("Habilidad: ");
         int habilidad = Entrada.leerEntero();
         while (habilidad < 1 || habilidad > 4) {
@@ -105,7 +112,6 @@ public class App {
         Jugador jugador = FactoriaJugador.crearJugador(habilidad, altura);
         jugador.setNombre(nombre);
         jugador.setDorsal(dors);
-        jugador.setPuntos(puntos);
         jugador.setAltura(altura);
         jugador.setHabilidad(habilidad);
         e.agregarJugador(jugador);
@@ -157,9 +163,5 @@ public class App {
         }
 
     }
-
-  
-
-   
 
 }

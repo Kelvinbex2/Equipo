@@ -8,11 +8,7 @@ import Modelo.Jugador;
 import Modelo.Pivot;
 
 public class FactoriaJugador {
-    static int base = 0;
-    static int escota = 0;
-    static int alero = 0;
-    static int pivot = 0;
-    static int alaPitot = 0;
+   
 
     public static Jugador crearJugador(int habilidad, int altura) {
         if (altura < 180 && habilidad >= 4) {

@@ -10,7 +10,7 @@ public abstract class Jugador {
     private int altura;
     private int puntos;
     private int faltas;
-    private int cantidadJugadores = 0;
+    
 
     public Jugador() {
     }
@@ -23,7 +23,6 @@ public abstract class Jugador {
         this.altura = altura;
         this.puntos = (int) (10 + (Math.random() * (50 - 10 + 1)));
         this.faltas = (int) (1 + (Math.random() * (5 - 1 + 1)));
-        cantidadJugadores++;
 
     }
 
@@ -75,21 +74,9 @@ public abstract class Jugador {
         this.faltas = faltas;
     }
 
-    private void validarCantidadJugadores() {
-        if (cantidadJugadores >= 15) {
-            throw new IllegalArgumentException(
-                    "Se ha superado el límite de jugadores por equipo (15), no admite mas de 15");
-        }
-    }
+   
 
-    public void anotarPuntos(int puntos) {
-        this.puntos += puntos;
-    }
-
-    public void incrementarFaltas(int faltas) {
-        this.faltas += faltas;
-    }
-
+ 
     public void informacion() {
 
     }

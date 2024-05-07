@@ -1,7 +1,7 @@
 package Modelo;
 
 public class AlaPitot extends Jugador {
-    public static final String TIPO = "Ala Pitot";
+    public static final String TIPO = "Ala-Pitot";
 
     public AlaPitot(){
         

@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import Controller.Equipable;
 import Controller.FactoryPartidos;
 import Entrada.Entrada;
@@ -15,6 +14,7 @@ public class Equipo implements Equipable {
     private String tipo;
     private List<Jugador> jugadores;
     private List<Partidos> partidos;
+    private List<Temporada> temporadas;
 
     public Equipo() {
     }
@@ -24,6 +24,7 @@ public class Equipo implements Equipable {
         setTipo(tipo);
         this.jugadores = new ArrayList<>();
         this.partidos = new ArrayList<>();
+        this.temporadas = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -55,29 +56,36 @@ public class Equipo implements Equipable {
     }
 
     public void setTipo(String tipo) {
-        String[] tipos = { "Local", "Visitante" };
-        System.out.println("Tipo de Equipo");
-        boolean hayTipo = false;
-
-        for (String tip : tipos) {
-            if (tipo.equalsIgnoreCase(tip)) {
-                hayTipo = true;
-                break;
-            }
-        }
-
-        if (!hayTipo) {
-            throw new IllegalArgumentException("El tipo de equipo solo puede ser Local o vistante" + tipo);
-        }
 
         this.tipo = tipo;
+    }
+
+    public List<Temporada> getTemporadas() {
+        return temporadas;
+    }
+
+    public void setTemporadas(List<Temporada> temporadas) {
+        this.temporadas = temporadas;
+    }
+
+    public void comprobar(String nombre) {
+        for (Jugador jugador : jugadores) {
+            if (jugador.getNombre().equals(nombre)) {
+                throw new IllegalArgumentException("El nombre ya existe");
+            }
+        }
     }
 
     @Override
     public void agregarJugador(Jugador jugador) {
 
-        jugadores.add(jugador);
+        if (jugadores.size() < 15) {
+            jugadores.add(jugador);
 
+        } else {
+            throw new IllegalArgumentException(
+                    "Se ha superado el límite de jugadores por equipo (15), no admite mas de 15");
+        }
     }
 
     @Override
@@ -115,7 +123,7 @@ public class Equipo implements Equipable {
                         System.out.println("El puntaje del partido no es adecuado para simular como equipo local.");
                     }
                 } else {
-                    
+
                     System.out.println("Simulación como equipo visitante (a implementar).");
                 }
             }
@@ -123,8 +131,6 @@ public class Equipo implements Equipable {
             System.out.println("Hasta luego");
         }
     }
-
-   
 
     @Override
     public void obtenerResumen() {
@@ -149,26 +155,37 @@ public class Equipo implements Equipable {
         if (jugadores.isEmpty()) {
             System.out.println("No hay jugadores disponibles");
         }
+        boolean found=false;
+        System.out.print("Escribe el nombre a Mostrar:");
+        String nombre = Entrada.leerString();
         for (Jugador j : jugadores) {
-            if (j instanceof AlaPitot) {
+           
+            if (j instanceof AlaPitot && j.getNombre().equalsIgnoreCase(nombre)) {
                 ((AlaPitot) j).informacion();
-            } else if (j instanceof Alero) {
+                found=true;
+            } else if (j instanceof Alero && j.getNombre().equalsIgnoreCase(nombre)) {
                 ((Alero) j).informacion();
-            } else if (j instanceof Pivot) {
+                found=true;
+            } else if (j instanceof Pivot && j.getNombre().equalsIgnoreCase(nombre)) {
                 ((Pivot) j).informacion();
-            } else if (j instanceof Base) {
+                found=true;
+            } else if (j instanceof Base && j.getNombre().equalsIgnoreCase(nombre)) {
                 ((Base) j).informacion();
-            } else if (j instanceof Escota) {
+                found=true;
+            } else if (j instanceof Escota && j.getNombre().equalsIgnoreCase(nombre)) {
                 ((Escota) j).informacion();
+                found=true;
             }
+        }
+
+        if (!found) {
+            System.out.println("\nEl nombre " + nombre + " no existe.\n");
         }
     }
 
     public void agregarPartido(Partidos partido) {
         partidos.add(partido);
     }
-
-    
 
     public LocalDate crearDate() {
         System.out.print("Anio:");
@@ -181,23 +198,22 @@ public class Equipo implements Equipable {
         return LocalDate.of(anio, mes, dia);
     }
 
-//////// metodos para Jugar un partido
+    //////// metodos para Jugar un partido
 
-public int crearPartido() {
-    System.out.println("1. Oficial");
-    System.out.println("2. Exhibición");
-    System.out.print("Elige una opción: ");
-    int tipo = Entrada.leerEntero();
+    public int crearPartido() {
+        System.out.println("1. Oficial");
+        System.out.println("2. Exhibición");
+        System.out.print("Elige una opción: ");
+        int tipo = Entrada.leerEntero();
 
-    Partidos p = FactoryPartidos.crearPartido(tipo);
-    agregarPartido(p);
+        Partidos p = FactoryPartidos.crearPartido(tipo);
+        agregarPartido(p);
 
-    LocalDate date = crearDate();
-    p.setFecha(date);
+        LocalDate date = crearDate();
+        p.setFecha(date);
 
-    return tipo;
-}
-
+        return tipo;
+    }
 
     private Partidos obtPartidos(int opc) {
         return FactoryPartidos.crearPartido(opc);
@@ -221,7 +237,6 @@ public int crearPartido() {
             return random.nextInt(16) + 35;
         }
     }
-
 
     private void actualizarPuntosJugadores(int resultadoSimulado) {
         for (Jugador jugador : jugadores) {
