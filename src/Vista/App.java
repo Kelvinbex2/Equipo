@@ -11,11 +11,12 @@ import Modelo.Base;
 import Modelo.Equipo;
 import Modelo.Escota;
 import Modelo.Jugador;
+import Modelo.Oficial;
+import Modelo.Partidos;
 import Modelo.Pivot;
 
 public class App {
     static List<Equipo> equipos = new ArrayList<>();
-    static Jugador j;
     static Equipo e;
     // static Partidos p;
 
@@ -73,7 +74,7 @@ public class App {
 
         e = new Equipo("kelvin", "Local");
         Jugador o = new Base("kelvin", 1, 4, 180);
-        j = new Base("kelvin", 1, 4, 180);
+        Jugador j = new Base("kelvin", 1, 4, 180);
         Jugador s = new Base("kelvin", 1, 4, 180);
         Jugador i = new Base("kelvin", 1, 4, 180);
 
@@ -164,5 +165,7 @@ public class App {
         }
 
     }
+
+  
 
 }

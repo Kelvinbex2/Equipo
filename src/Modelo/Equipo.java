@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Stack;
+
 import Controller.Equipable;
 import Controller.FactoryPartidos;
 import Entrada.Entrada;
@@ -13,8 +15,8 @@ public class Equipo implements Equipable {
     private String nombre;
     private String tipo;
     private List<Jugador> jugadores;
-    private List<Partidos> partidos;
-    private List<Temporada> temporadas;
+    private Stack<Partidos> partidos;
+  
 
     public Equipo() {
     }
@@ -23,8 +25,8 @@ public class Equipo implements Equipable {
         this.nombre = nombre;
         setTipo(tipo);
         this.jugadores = new ArrayList<>();
-        this.partidos = new ArrayList<>();
-        this.temporadas = new ArrayList<>();
+        this.partidos = new Stack<>();
+       
     }
 
     public String getNombre() {
@@ -43,11 +45,11 @@ public class Equipo implements Equipable {
         this.jugadores = jugadores;
     }
 
-    public List<Partidos> getPartidos() {
+    public Stack<Partidos> getPartidos() {
         return partidos;
     }
 
-    public void setPartidos(List<Partidos> partidos) {
+    public void setPartidos(Stack<Partidos> partidos) {
         this.partidos = partidos;
     }
 
@@ -60,14 +62,9 @@ public class Equipo implements Equipable {
         this.tipo = tipo;
     }
 
-    public List<Temporada> getTemporadas() {
-        return temporadas;
-    }
+   
 
-    public void setTemporadas(List<Temporada> temporadas) {
-        this.temporadas = temporadas;
-    }
-
+    
     public void comprobar(String nombre) {
         for (Jugador jugador : jugadores) {
             if (jugador.getNombre().equals(nombre)) {
@@ -105,6 +102,7 @@ public class Equipo implements Equipable {
             if (p != null) {
                 System.out.println("¿Somos equipo local? (S/N)");
                 String op2 = Entrada.leerString();
+                
 
                 if (op2.equalsIgnoreCase("S")) {
                     // Validar el puntaje del partido para simulación local
@@ -138,7 +136,7 @@ public class Equipo implements Equipable {
             if (partidos.isEmpty()) {
                 System.out.println("\nNo hay parditos hoy\n");
             } else if (partido instanceof Oficial) {
-                System.out.println(((Oficial) partido).toString());
+                System.out.println(((Oficial) partidos.peek()).toString());
             }
         }
 
