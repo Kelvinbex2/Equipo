@@ -21,7 +21,7 @@ public class Equipo implements Equipable {
 
     public Equipo(String nombre) {
         this.nombre = nombre;
-      
+
         this.jugadores = new ArrayList<>();
         this.partidos = new Stack<>();
 
@@ -50,8 +50,6 @@ public class Equipo implements Equipable {
     public void setPartidos(Stack<Partidos> partidos) {
         this.partidos = partidos;
     }
-
-   
 
     public void comprobar(String nombre) {
         for (Jugador jugador : jugadores) {
@@ -87,7 +85,7 @@ public class Equipo implements Equipable {
             int valid = crearPartido();
             Partidos p = obtPartidos(valid);
 
-            if (p != null) {
+            if (p != null && getJugadores().size() > 5) {
                 System.out.println("¿Somos equipo local? (S/N)");
                 String op2 = Entrada.leerString();
 
@@ -107,7 +105,7 @@ public class Equipo implements Equipable {
                     } else {
                         System.out.println("El puntaje del partido no es adecuado para simular como equipo local.");
                     }
-                } else {
+                } else if (p != null && getJugadores().size() > 5) {
 
                     System.out.println("Simulación como equipo visitante (a implementar).");
                 }

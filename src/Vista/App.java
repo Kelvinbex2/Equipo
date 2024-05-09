@@ -28,8 +28,7 @@ public class App {
         Jugador s = new Base("kelvin3", 1, 4, 180);
         Jugador i = new Base("kelvin4", 1, 4, 180);
 
-        // p = new Oficial(crearDate());
-        // e.agregarPartido(p);
+        
         e.agregarJugador(j);
         e.agregarJugador(i);
         e.agregarJugador(o);
@@ -48,7 +47,7 @@ public class App {
             System.out.println("1. Agregar Jugador");
             System.out.println("2. Eliminar Jugador");
             System.out.println("3. Jugar Partido");
-            System.out.println("4. Mostrar resumen del  partido");
+            System.out.println("4. Mostrar partido anterior");
             System.out.println("5. Obtener Resumen");
             System.out.println("6. Mostrar resumen Jugador");
             System.out.println("0. Salir");
@@ -73,7 +72,7 @@ public class App {
 
                     break;
                 case 5:
-
+                
                     break;
                 case 6:
                     e.obtenerResumenJugador();

@@ -28,7 +28,7 @@ public class Oficial extends Partidos {
 
     @Override
     public String toString() {
-        return "Oficial\n" + "esLocal:" + esLocal + ", fecha: " + getFecha() + "Puntos: " + getPuntos();
+        return "Oficial\n" + "esLocal:" + esLocal + ", fecha:" + getFecha() + " Puntos:" + getPuntos();
     }
 
 }
