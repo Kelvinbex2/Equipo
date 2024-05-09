@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
-import Controller.Equipable;
-import Controller.FactoryPartidos;
-import Entrada.Entrada;
+import Modelo.Entrada.Entrada;
+import Modelo.Factoria.Equipable;
+import Modelo.Factoria.FactoryPartidos;
 
 public class Equipo implements Equipable {
 
@@ -16,7 +16,6 @@ public class Equipo implements Equipable {
     private String tipo;
     private List<Jugador> jugadores;
     private Stack<Partidos> partidos;
-  
 
     public Equipo() {
     }
@@ -26,7 +25,7 @@ public class Equipo implements Equipable {
         setTipo(tipo);
         this.jugadores = new ArrayList<>();
         this.partidos = new Stack<>();
-       
+
     }
 
     public String getNombre() {
@@ -62,9 +61,6 @@ public class Equipo implements Equipable {
         this.tipo = tipo;
     }
 
-   
-
-    
     public void comprobar(String nombre) {
         for (Jugador jugador : jugadores) {
             if (jugador.getNombre().equals(nombre)) {
@@ -102,7 +98,6 @@ public class Equipo implements Equipable {
             if (p != null) {
                 System.out.println("¿Somos equipo local? (S/N)");
                 String op2 = Entrada.leerString();
-                
 
                 if (op2.equalsIgnoreCase("S")) {
                     // Validar el puntaje del partido para simulación local
@@ -153,32 +148,42 @@ public class Equipo implements Equipable {
         if (jugadores.isEmpty()) {
             System.out.println("\nNo hay jugadores disponibles\n");
         }
-        boolean found=false;
-        System.out.print("Escribe el nombre a Mostrar:");
-        String nombre = Entrada.leerString();
-        for (Jugador j : jugadores) {
-           
-            if (j instanceof AlaPitot && j.getNombre().equalsIgnoreCase(nombre)) {
-                ((AlaPitot) j).informacion();
-                found=true;
-            } else if (j instanceof Alero && j.getNombre().equalsIgnoreCase(nombre)) {
-                ((Alero) j).informacion();
-                found=true;
-            } else if (j instanceof Pivot && j.getNombre().equalsIgnoreCase(nombre)) {
-                ((Pivot) j).informacion();
-                found=true;
-            } else if (j instanceof Base && j.getNombre().equalsIgnoreCase(nombre)) {
-                ((Base) j).informacion();
-                found=true;
-            } else if (j instanceof Escota && j.getNombre().equalsIgnoreCase(nombre)) {
-                ((Escota) j).informacion();
-                found=true;
+
+        System.out.print("\n1.Nombre \n2.Lista \nQuieres buscar por nombre or quieres la lista de los jugadores: ");
+        int opc = Entrada.leerEntero();
+        boolean found = false;
+        if (opc == 1) {
+            System.out.print("\nEscribe el nombre a Mostrar:");
+            String nombre = Entrada.leerString();
+            for (Jugador j : jugadores) {
+
+                if (j instanceof AlaPitot && j.getNombre().equalsIgnoreCase(nombre)) {
+                    ((AlaPitot) j).informacion();
+                    found = true;
+                } else if (j instanceof Alero && j.getNombre().equalsIgnoreCase(nombre)) {
+                    ((Alero) j).informacion();
+                    found = true;
+                } else if (j instanceof Pivot && j.getNombre().equalsIgnoreCase(nombre)) {
+                    ((Pivot) j).informacion();
+                    found = true;
+                } else if (j instanceof Base && j.getNombre().equalsIgnoreCase(nombre)) {
+                    ((Base) j).informacion();
+                    found = true;
+                } else if (j instanceof Escota && j.getNombre().equalsIgnoreCase(nombre)) {
+                    ((Escota) j).informacion();
+                    found = true;
+                }
+
+            }
+            if (!found) {
+                System.out.println("\nEl nombre " + nombre + " no existe.\n");
+            }
+        } else {
+            for (Jugador jugador : jugadores) {
+                jugador.informacion();
             }
         }
 
-        if (!found) {
-            System.out.println("\nEl nombre " + nombre + " no existe.\n");
-        }
     }
 
     public void agregarPartido(Partidos partido) {

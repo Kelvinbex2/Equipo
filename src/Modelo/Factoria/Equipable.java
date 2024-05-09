@@ -1,4 +1,4 @@
-package Controller;
+package Modelo.Factoria;
 import Modelo.Jugador;
 
 public interface Equipable {

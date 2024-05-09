@@ -3,17 +3,15 @@ package Vista;
 import java.util.ArrayList;
 import java.util.List;
 
-import Controller.FactoriaJugador;
-import Entrada.Entrada;
 import Modelo.AlaPitot;
 import Modelo.Alero;
 import Modelo.Base;
 import Modelo.Equipo;
 import Modelo.Escota;
 import Modelo.Jugador;
-import Modelo.Oficial;
-import Modelo.Partidos;
 import Modelo.Pivot;
+import Modelo.Entrada.Entrada;
+import Modelo.Factoria.FactoriaJugador;
 
 public class App {
     static List<Equipo> equipos = new ArrayList<>();
@@ -102,13 +100,18 @@ public class App {
         int dors = Entrada.leerEntero();
         System.out.print("Habilidad: ");
         int habilidad = Entrada.leerEntero();
-        while (habilidad < 1 || habilidad > 4) {
+        while (habilidad < 1 || habilidad > 5) {
             System.out.println("tiene que ser de un rango 1 a 5 ");
             System.out.print("Habilidad: ");
             habilidad = Entrada.leerEntero();
         }
         System.out.print("Altura: ");
         int altura = Entrada.leerEntero();
+        while (altura < 180 || altura > 200) {
+            System.out.println("La altura debe esta en el rango de 180 a 200");
+            System.out.print("Altura: ");
+            altura = Entrada.leerEntero();
+        }
 
         Jugador jugador = FactoriaJugador.crearJugador(habilidad, altura);
 
@@ -165,7 +168,5 @@ public class App {
         }
 
     }
-
-  
 
 }
