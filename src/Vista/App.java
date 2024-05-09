@@ -18,6 +18,28 @@ public class App {
     static Equipo e;
     // static Partidos p;
 
+
+
+    public static void main(String[] args) throws Exception {
+
+        e = new Equipo("kelvin");
+        Jugador o = new Base("kelvin1", 1, 4, 180);
+        Jugador j = new Base("kelvin2", 1, 4, 180);
+        Jugador s = new Base("kelvin3", 1, 4, 180);
+        Jugador i = new Base("kelvin4", 1, 4, 180);
+
+        // p = new Oficial(crearDate());
+        // e.agregarPartido(p);
+        e.agregarJugador(j);
+        e.agregarJugador(i);
+        e.agregarJugador(o);
+        e.agregarJugador(s);
+        addEquipo(e);
+        crearMenu();
+
+    }
+
+
     public static void crearMenu() {
 
         int op = 0;
@@ -65,25 +87,6 @@ public class App {
                     break;
             }
         } while (op != 0);
-
-    }
-
-    public static void main(String[] args) throws Exception {
-
-        e = new Equipo("kelvin", "Local");
-        Jugador o = new Base("kelvin", 1, 4, 180);
-        Jugador j = new Base("kelvin", 1, 4, 180);
-        Jugador s = new Base("kelvin", 1, 4, 180);
-        Jugador i = new Base("kelvin", 1, 4, 180);
-
-        // p = new Oficial(crearDate());
-        // e.agregarPartido(p);
-        e.agregarJugador(j);
-        e.agregarJugador(i);
-        e.agregarJugador(o);
-        e.agregarJugador(s);
-        addEquipo(e);
-        crearMenu();
 
     }
 

@@ -2,25 +2,34 @@
 title "Diagrama de clases"
 
 package es/madrid/parla/tierno/equipo/src/diagrama{
-    package src/equipo/Controlador{
 
-        interface Equipable{
-            + agregarJugador(jugador: Jugador): void
-            + eliminarJugador(dorsal: int): void
-            + jugarPartido(oficial: boolean): void
-            + obtenerResumenUltimoPartido(): String
-            + obtenerHistoricoTemporada(): String
-            + obtenerResumenJugador(dorsal: int): String
-        }
-
-    }
 
 
     package src/equipo/modelo{
+
+        package factoria{
+
+            interface Equipable{
+                + agregarJugador(jugador: Jugador): void
+                + eliminarJugador(dorsal: int): void
+                + jugarPartido(oficial: boolean): void
+                + obtenerResumenUltimoPartido(): String
+                + obtenerHistoricoTemporada(): String
+                + obtenerResumenJugador(dorsal: int): String
+            }
+
+            class FactoriaJugador{
+                +crearJugador(int habilidad, int altura):Jugador
+            }
+            class FactoriaPartido{
+                +crearPartido(int opc):Partido
+            }
+
+        }
         class Equipo{
             - String: nombre
             - jugador : List<jugador>
-            - partidos : List<Partidos>
+            - partidos : Stack<Partidos>
         }
 
 
@@ -53,9 +62,12 @@ package es/madrid/parla/tierno/equipo/src/diagrama{
         }
 
 
-        class FactoriaJugador(){
-            + crearJugado( altura: String, habilidad: String): Jugador
-                
+        class Oficial extends Partidos{
+            
+        }
+
+        class Exhibicion extends Partidos{
+
         }
 
 
@@ -82,8 +94,10 @@ package es/madrid/parla/tierno/equipo/src/diagrama{
 
 
     Equipable <|.... Equipo
-    Jugador ....*  Equipo
+    Jugador ....o  Equipo
     Partidos ....o Equipo
+    FactoriaJugador .....o Equipo
+    FactoriaPartido .....o Equipo
 
 
 }

@@ -13,16 +13,15 @@ import Modelo.Factoria.FactoryPartidos;
 public class Equipo implements Equipable {
 
     private String nombre;
-    private String tipo;
     private List<Jugador> jugadores;
     private Stack<Partidos> partidos;
 
     public Equipo() {
     }
 
-    public Equipo(String nombre, String tipo) {
+    public Equipo(String nombre) {
         this.nombre = nombre;
-        setTipo(tipo);
+      
         this.jugadores = new ArrayList<>();
         this.partidos = new Stack<>();
 
@@ -52,14 +51,7 @@ public class Equipo implements Equipable {
         this.partidos = partidos;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-
-        this.tipo = tipo;
-    }
+   
 
     public void comprobar(String nombre) {
         for (Jugador jugador : jugadores) {
