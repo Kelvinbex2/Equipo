@@ -1,6 +1,7 @@
 package Modelo;
 
 import java.time.LocalDate;
+import java.util.Random;
 
 public abstract class Partidos {
 
@@ -10,12 +11,12 @@ public abstract class Partidos {
 
 
     public Partidos() {
-        this.puntos = (int) (35 + (Math.random() * (150 - 35 + 1)));
+        this.puntos = getPuntos();
         this.ganado=true;
     }
 
     public Partidos(LocalDate fecha) {
-        this.puntos = (int) (35 + (Math.random() * (150 - 35 + 1)));
+        this.puntos = getPuntos();
         this.ganado=true;
     }
 
@@ -44,6 +45,23 @@ public abstract class Partidos {
     public void setGanado(boolean ganado) {
         this.ganado = ganado;
     }
+
+    public void jugar(){
+        Random r = new Random();
+        int probabilidad = r.nextInt(10) + 1;
+        int puntos =0;
+        if(this.ganado){
+            puntos = r.nextInt(116) + 35;
+            if(probabilidad <= 7){
+                puntos = r.nextInt(31) + 70; 
+                this.puntos = puntos;
+            }else{
+                this.puntos = puntos;
+            }
+        }
+    }
+
+
 
    
 

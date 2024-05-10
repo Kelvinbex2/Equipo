@@ -91,15 +91,11 @@ public class Equipo implements Equipable {
 
                 if (op2.equalsIgnoreCase("S")) {
                     // Validar el puntaje del partido para simulación local
-                    int puntosPartido = p.getPuntos();
-                    if (puntosPartido >= 35 && puntosPartido <= 150) {
-                        int resultadoSimulado = simularLocal();
-
+                    int resultadoSimulado = p.ganado();
+                    int puntosPartido = 0;
+                    actualizarPuntosJugadores(puntosPartido);
+                    if (puntosPartido >= 35 && puntosPartido <= 150 && p.isGanado()==true) {
                         System.out.println("Resultado simulado del partido: " + resultadoSimulado);
-
-                        // Actualizar puntos de los jugadores basados en el resultado simulado
-                        actualizarPuntosJugadores(resultadoSimulado);
-
                         System.out.println("----------------");
                         mostrarResumenJugadores(p.getFecha());
                     } else {
@@ -221,21 +217,18 @@ public class Equipo implements Equipable {
 
     }
 
-    private int simularLocal() {
-        Random random = new Random();
 
-        if (random.nextDouble() < 0.7) {
-            return random.nextInt(31) + 70;
-        } else {
-            return random.nextInt(16) + 35;
-        }
-    }
 
     private void actualizarPuntosJugadores(int resultadoSimulado) {
+        Random rand = new Random();
+        int ha = rand.nextInt(115) + 35;
+    
         for (Jugador jugador : jugadores) {
-            jugador.setPuntos(jugador.getPuntos() + resultadoSimulado);
+            jugador.setPuntos(jugador.getPuntos() + ha);
         }
     }
+    
+    
 
     ////////////////////////////////////////////////
 
