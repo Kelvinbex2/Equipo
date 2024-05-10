@@ -72,7 +72,7 @@ public class App {
 
                     break;
                 case 5:
-                
+                    e.obtenerHistoricoTemporada();
                     break;
                 case 6:
                     e.obtenerResumenJugador();

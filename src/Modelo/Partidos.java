@@ -47,16 +47,20 @@ public abstract class Partidos {
     public void jugar() {
         Random r = new Random();
         int probabilidad = r.nextInt(10) + 1;
-        if (this.ganado) {
             if (probabilidad <= 7) {
                 this.puntos = r.nextInt(31) + 70; // Aumenta los puntos si se cumple la probabilidad
             } else {
                 this.puntos = r.nextInt(116) + 35; // Otro rango de puntos si no se cumple la probabilidad
             }
-        }
+        
     }
 
     public void ganador() {
+    }
+
+    @Override
+    public String toString() {
+        return "Partidos puntos: " + puntos + ", fecha: " + fecha + ", ganado: " + ganado + "]";
     }
 
 }

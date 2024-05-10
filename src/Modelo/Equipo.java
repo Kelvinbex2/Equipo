@@ -107,21 +107,51 @@ public class Equipo implements Equipable {
                     System.out.println("¿Somos equipo local? (S/N)");
                     String op3 = Entrada.leerString();
                     Oficial oficial = (Oficial) p;
-                    if (op3.equalsIgnoreCase("s")) {
-                        oficial.setFecha(date);
-                        p.jugar();
-                        oficial.ganador();
-                        actualizarPuntosJugadores(p.getPuntos());
-                        mostrarResumenJugadores(p.getFecha());
-                    } else {
-                        p.jugar();
-                        oficial.ganador();
+                    oficial.setEsLocal(op3.equalsIgnoreCase("s"));
+                    oficial.setFecha(date);
+                    p.jugar();
+                    oficial.ganador();
+                    System.out.println("Resumen de puntos y faltas por jugador:");
+                    int puntosRestantes = p.getPuntos();
+                    for (int i = 0; i < getJugadores().size(); i++) {
+                        Jugador jugador = getJugadores().get(i);
+                        int faltas = (int) (Math.random() * 3);
+                        int puntos;
+                        if (i == getJugadores().size() - 1) {
+                            puntos = puntosRestantes;
+                        } else {
+                            puntos = (int) (Math.random() * puntosRestantes);
+                        }
+                        puntosRestantes -= puntos;
+                        System.out.println(
+                                "Nombre: " + jugador.getNombre() + ", Puntos " + puntos + ", Faltas: " + faltas);
+                        actualizarPuntosJugadores(puntos, jugador);
+                        jugador.setFaltas(jugador.getFaltas() + faltas);
                     }
-
                 } else if (getJugadores().size() >= 4 && op2 == 2 && p instanceof Exhibicion) {
                     Exhibicion exhibicion = (Exhibicion) p;
+
                     exhibicion.setFecha(date);
-                    jugarYActualizar(exhibicion);
+                    p.jugar();
+                    exhibicion.ganador();
+                    System.out.println("Resumen de puntos y faltas por jugador:");
+                    int puntosRestantes = p.getPuntos();
+                    for (int i = 0; i < getJugadores().size(); i++) {
+                        Jugador jugador = getJugadores().get(i);
+                        int faltas = (int) (Math.random() * 3);
+                        int puntos;
+                        if (i == getJugadores().size() - 1) {
+                            puntos = puntosRestantes;
+                        } else {
+                            puntos = (int) (Math.random() * puntosRestantes);
+                        }
+                        puntosRestantes -= puntos;
+                        System.out.println(
+                                "Nombre: " + jugador.getNombre() + ", Puntos " + puntos + ", Faltas: " + faltas);
+                        actualizarPuntosJugadores(puntos, jugador);
+                        jugador.setFaltas(jugador.getFaltas() + faltas);
+                    }
+
                 }
             } else {
                 System.out.println("Tipo de partido no reconocido");
@@ -131,28 +161,28 @@ public class Equipo implements Equipable {
         }
     }
 
-    private void jugarYActualizar(Partidos partido) {
-
-    }
-
     @Override
     public void obtenerResumen() {
-        for (Partidos partido : partidos) {
-            if (partidos.isEmpty()) {
-                System.out.println("\nNo hay parditos hoy\n");
-            } else if (partido instanceof Oficial) {
-                System.out.println(((Oficial) partidos.peek()).toString());
-            } else if (partido instanceof Exhibicion) {
-                System.out.println(((Exhibicion) partidos.peek()).toString());
-            }
+        Partidos partido = partidos.peek();
+        if (partidos.isEmpty()) {
+            System.out.println("\nNo hay parditos hoy\n");
+        } else if (partido instanceof Oficial) {
+            System.out.println(((Oficial) partido).toString());
+        } else if (partido instanceof Exhibicion) {
+            System.out.println(((Exhibicion) partido).toString());
         }
 
     }
 
     @Override
     public void obtenerHistoricoTemporada() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'obtenerHistoricoTemporada'");
+        for (Partidos partido : partidos) {
+            if (partido instanceof Oficial) {
+                System.out.println(((Oficial) partido).toString());
+            } else if (partido instanceof Exhibicion) {
+                System.out.println(((Exhibicion) partido).toString());
+            }
+        }
     }
 
     @Override
@@ -220,10 +250,10 @@ public class Equipo implements Equipable {
 
     }
 
-    private void actualizarPuntosJugadores(int puntos) {
-        for (Jugador jugador : jugadores) {
-            jugador.setPuntos(jugador.getPuntos() + puntos);
-        }
+    private void actualizarPuntosJugadores(int puntos, Jugador jugador) {
+
+        jugador.setPuntos(jugador.getPuntos() + puntos);
+
     }
 
     ////////////////////////////////////////////////
