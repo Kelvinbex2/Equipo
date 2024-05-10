@@ -115,7 +115,7 @@ public class App {
             altura = Entrada.leerEntero();
         }
 
-        Jugador jugador = FactoriaJugador.crearJugador(habilidad, altura);
+        Jugador jugador = FactoriaJugador.crearJugador(nombre,dors,habilidad,altura);
 
         jugador.setNombre(nombre);
         jugador.setDorsal(dors);

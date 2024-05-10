@@ -8,6 +8,7 @@ import java.util.Stack;
 
 import Modelo.Entrada.Entrada;
 import Modelo.Factoria.Equipable;
+import Modelo.Factoria.FactoriaJugador;
 import Modelo.Factoria.FactoryPartidos;
 
 public class Equipo implements Equipable {
@@ -63,7 +64,10 @@ public class Equipo implements Equipable {
     public void agregarJugador(Jugador jugador) {
 
         if (jugadores.size() < 15) {
-            jugadores.add(jugador);
+
+            Jugador j = FactoriaJugador.crearJugador(jugador.getNombre(), jugador.getDorsal(), jugador.getHabilidad(),
+                    jugador.getAltura());
+            jugadores.add(j);
 
         } else {
             throw new IllegalArgumentException(
@@ -82,32 +86,38 @@ public class Equipo implements Equipable {
         String op = Entrada.leerString();
 
         if (op.equalsIgnoreCase("S")) {
-            int valid = crearPartido();
-            Partidos p = obtPartidos(valid);
-
-            if (p != null && getJugadores().size() > 5) {
-                System.out.println("¿Somos equipo local? (S/N)");
-                String op2 = Entrada.leerString();
-
-                if (op2.equalsIgnoreCase("S")) {
-                    // Validar el puntaje del partido para simulación local
-                    int puntosPartido = p.getPuntos();
-                    if (puntosPartido >= 35 && puntosPartido <= 150) {
-                        int resultadoSimulado = simularLocal();
-
-                        System.out.println("Resultado simulado del partido: " + resultadoSimulado);
-
-                        // Actualizar puntos de los jugadores basados en el resultado simulado
-                        actualizarPuntosJugadores(resultadoSimulado);
-
-                        System.out.println("----------------");
-                        mostrarResumenJugadores(p.getFecha());
+            System.out.println("Oficial ? (S/N)");
+            String op2 = Entrada.leerString();
+            if (op2.equalsIgnoreCase("S")) {
+                Oficial p = new Oficial();
+                if (p != null && getJugadores().size() > 5) {
+                    System.out.println("¿Somos equipo local? (S/N)");
+                    String op3 = Entrada.leerString();
+                    if (op3.equalsIgnoreCase("S")) {
+                        p.setEsLocal(true);
+                        p.jugar();
+                        p.ganador();
                     } else {
-                        System.out.println("El puntaje del partido no es adecuado para simular como equipo local.");
+                        p.setEsLocal(false);
+                        p.jugar();
+                        p.ganador();
                     }
-                } else if (p != null && getJugadores().size() > 5) {
-
-                    System.out.println("Simulación como equipo visitante (a implementar).");
+                    actualizarPuntosJugadores(p.getPuntos());
+                } else {
+                    System.out.println("No hay suficientes jugadores para jugar un partido oficial");
+                }
+            } else {
+                Exhibicion p = new Exhibicion();
+                if (p != null && getJugadores().size() > 5) {
+                    System.out.println("¿Somos equipo local? (S/N)");
+                    String op3 = Entrada.leerString();
+                    if (op3.equalsIgnoreCase("S")) {
+                        p.jugar();
+                    } else {
+                        p.jugar();
+                    }
+                } else {
+                    System.out.println("No hay suficientes jugadores para jugar un partido de exhibición");
                 }
             }
         } else {
@@ -208,10 +218,6 @@ public class Equipo implements Equipable {
         return tipo;
     }
 
-    private Partidos obtPartidos(int opc) {
-        return FactoryPartidos.crearPartido(opc);
-    }
-
     private void mostrarResumenJugadores(LocalDate localDate) {
         System.out.println("Resumen de puntos y faltas por jugador:");
         for (Jugador jugador : jugadores) {
@@ -219,16 +225,6 @@ public class Equipo implements Equipable {
                     + jugador.getFaltas());
         }
 
-    }
-
-    private int simularLocal() {
-        Random random = new Random();
-
-        if (random.nextDouble() < 0.7) {
-            return random.nextInt(31) + 70;
-        } else {
-            return random.nextInt(16) + 35;
-        }
     }
 
     private void actualizarPuntosJugadores(int resultadoSimulado) {
