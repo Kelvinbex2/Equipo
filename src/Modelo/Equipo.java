@@ -86,6 +86,7 @@ public class Equipo implements Equipable {
         String op = Entrada.leerString();
 
         if (op.equalsIgnoreCase("S")) {
+<<<<<<< HEAD
             System.out.println("Oficial ? (S/N)");
             String op2 = Entrada.leerString();
             if (op2.equalsIgnoreCase("S")) {
@@ -118,6 +119,20 @@ public class Equipo implements Equipable {
                     }
                 } else {
                     System.out.println("No hay suficientes jugadores para jugar un partido de exhibición");
+=======
+            int valid = crearPartido();
+            Partidos p = obtPartidos(valid);
+            if (p != null && getJugadores().size() > 5) {
+                p = new Oficial(); 
+                System.out.println("¿Somos equipo local? (S/N)");
+                String op2 = Entrada.leerString();
+                if (op2.equalsIgnoreCase("S")) {
+                   
+                p.jugar();
+                } else if (p != null && getJugadores().size() > 5) {
+
+                    System.out.println("Simulación como equipo visitante (a implementar).");
+>>>>>>> d529df1363a306e4bac801fdcc3ed89d911cf9af
                 }
             }
         } else {
@@ -227,11 +242,21 @@ public class Equipo implements Equipable {
 
     }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> d529df1363a306e4bac801fdcc3ed89d911cf9af
     private void actualizarPuntosJugadores(int resultadoSimulado) {
+        Random rand = new Random();
+        int ha = rand.nextInt(115) + 35;
+    
         for (Jugador jugador : jugadores) {
-            jugador.setPuntos(jugador.getPuntos() + resultadoSimulado);
+            jugador.setPuntos(jugador.getPuntos() + ha);
         }
     }
+    
+    
 
     ////////////////////////////////////////////////
 

@@ -50,4 +50,8 @@ public class Oficial extends Partidos {
         }
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> d529df1363a306e4bac801fdcc3ed89d911cf9af
