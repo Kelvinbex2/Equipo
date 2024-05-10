@@ -29,9 +29,10 @@ public class Oficial extends Partidos {
 
     @Override
     public String toString() {
-        return "Oficial\n" + "esLocal:" + esLocal + ", fecha:" + getFecha() + " Puntos:" + getPuntos();
+        return "Oficial\n" + "HaGanado:" + isGanado() + ", fecha:" + getFecha() + ", Puntos:" + getPuntos();
     }
 
+    @Override
     public void ganador() {
         Random r = new Random();
         int probabilidad = r.nextInt(10) + 1;
@@ -50,8 +51,4 @@ public class Oficial extends Partidos {
         }
     }
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> d529df1363a306e4bac801fdcc3ed89d911cf9af

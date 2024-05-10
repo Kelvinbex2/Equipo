@@ -21,7 +21,7 @@ public abstract class Jugador {
         this.dorsal = dorsal;
         this.habilidad = habilidad;
         this.altura = altura;
-        this.puntos = getPuntos();
+        this.puntos = 0;
         this.faltas = (int) (1 + (Math.random() * (5 - 1 + 1)));
 
     }

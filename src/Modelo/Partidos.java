@@ -9,15 +9,14 @@ public abstract class Partidos {
     protected LocalDate fecha;
     protected boolean ganado;
 
-
     public Partidos() {
-        this.puntos = getPuntos();
-        this.ganado=true;
+        this.puntos = 0;
+        this.ganado = true;
     }
 
     public Partidos(LocalDate fecha) {
-        this.puntos = getPuntos();
-        this.ganado=true;
+        this.puntos = 0;
+        this.ganado = true;
     }
 
     public int getPuntos() {
@@ -37,7 +36,6 @@ public abstract class Partidos {
         this.fecha = fecha;
     }
 
-    
     public boolean isGanado() {
         return ganado;
     }
@@ -46,23 +44,19 @@ public abstract class Partidos {
         this.ganado = ganado;
     }
 
-    public void jugar(){
+    public void jugar() {
         Random r = new Random();
         int probabilidad = r.nextInt(10) + 1;
-        int puntos =0;
-        if(this.ganado){
-            puntos = r.nextInt(116) + 35;
-            if(probabilidad <= 7){
-                puntos = r.nextInt(31) + 70; 
-                this.puntos = puntos;
-            }else{
-                this.puntos = puntos;
+        if (this.ganado) {
+            if (probabilidad <= 7) {
+                this.puntos = r.nextInt(31) + 70; // Aumenta los puntos si se cumple la probabilidad
+            } else {
+                this.puntos = r.nextInt(116) + 35; // Otro rango de puntos si no se cumple la probabilidad
             }
         }
     }
 
-
-
-   
+    public void ganador() {
+    }
 
 }

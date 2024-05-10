@@ -3,7 +3,6 @@ package Modelo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Stack;
 
 import Modelo.Entrada.Entrada;
@@ -80,49 +79,60 @@ public class Equipo implements Equipable {
         jugadores.remove(jugador);
     }
 
+    public void agregarPartido(Partidos partido) {
+        partidos.add(partido);
+    }
+
     @Override
     public void jugarPartido() {
         System.out.println("¿Quieres jugar un partido? (S/N)");
         String op = Entrada.leerString();
+        LocalDate date = crearDate();
 
         if (op.equalsIgnoreCase("S")) {
-            System.out.println("Oficial ? (S/N)");
-            String op2 = Entrada.leerString();
-            if (op2.equalsIgnoreCase("S")) {
-                Oficial p = new Oficial();
-                if (p != null && getJugadores().size() > 5) {
+            System.out.println("1. Oficial\n2. Exhibicion\nElige una opción: ");
+            int op2 = Entrada.leerEntero();
+
+            if (op2 != 1 && op2 != 2) {
+                System.out.println("Opción de partido inválida");
+                return;
+            }
+
+            Partidos p = FactoryPartidos.crearPartido(op2);
+
+            if (p != null) {
+                agregarPartido(p); // Agregar el partido creado a la lista de partidos
+
+                if (getJugadores().size() >= 4 && op2 == 1 && p instanceof Oficial) {
                     System.out.println("¿Somos equipo local? (S/N)");
                     String op3 = Entrada.leerString();
-                    if (op3.equalsIgnoreCase("S")) {
-                        p.setEsLocal(true);
+                    Oficial oficial = (Oficial) p;
+                    if (op3.equalsIgnoreCase("s")) {
+                        oficial.setFecha(date);
                         p.jugar();
-                        p.ganador();
+                        oficial.ganador();
+                        actualizarPuntosJugadores(p.getPuntos());
+                        mostrarResumenJugadores(p.getFecha());
                     } else {
-                        p.setEsLocal(false);
                         p.jugar();
-                        p.ganador();
+                        oficial.ganador();
                     }
-                    actualizarPuntosJugadores(p.getPuntos());
-                } else {
-                    System.out.println("No hay suficientes jugadores para jugar un partido oficial");
+
+                } else if (getJugadores().size() >= 4 && op2 == 2 && p instanceof Exhibicion) {
+                    Exhibicion exhibicion = (Exhibicion) p;
+                    exhibicion.setFecha(date);
+                    jugarYActualizar(exhibicion);
                 }
             } else {
-                Exhibicion p = new Exhibicion();
-                if (p != null && getJugadores().size() > 5) {
-                    System.out.println("¿Somos equipo local? (S/N)");
-                    String op3 = Entrada.leerString();
-                    if (op3.equalsIgnoreCase("S")) {
-                        p.jugar();
-                    } else {
-                        p.jugar();
-                    }
-                } else {
-                    System.out.println("No hay suficientes jugadores para jugar un partido de exhibición");
-                }
+                System.out.println("Tipo de partido no reconocido");
             }
         } else {
             System.out.println("Hasta luego");
         }
+    }
+
+    private void jugarYActualizar(Partidos partido) {
+
     }
 
     @Override
@@ -132,6 +142,8 @@ public class Equipo implements Equipable {
                 System.out.println("\nNo hay parditos hoy\n");
             } else if (partido instanceof Oficial) {
                 System.out.println(((Oficial) partidos.peek()).toString());
+            } else if (partido instanceof Exhibicion) {
+                System.out.println(((Exhibicion) partidos.peek()).toString());
             }
         }
 
@@ -186,10 +198,6 @@ public class Equipo implements Equipable {
 
     }
 
-    public void agregarPartido(Partidos partido) {
-        partidos.add(partido);
-    }
-
     public LocalDate crearDate() {
         System.out.print("Anio:");
         int anio = Entrada.leerEntero();
@@ -203,21 +211,6 @@ public class Equipo implements Equipable {
 
     //////// metodos para Jugar un partido
 
-    public int crearPartido() {
-        System.out.println("1. Oficial");
-        System.out.println("2. Exhibición");
-        System.out.print("Elige una opción: ");
-        int tipo = Entrada.leerEntero();
-
-        Partidos p = FactoryPartidos.crearPartido(tipo);
-        agregarPartido(p);
-
-        LocalDate date = crearDate();
-        p.setFecha(date);
-
-        return tipo;
-    }
-
     private void mostrarResumenJugadores(LocalDate localDate) {
         System.out.println("Resumen de puntos y faltas por jugador:");
         for (Jugador jugador : jugadores) {
@@ -227,9 +220,9 @@ public class Equipo implements Equipable {
 
     }
 
-    private void actualizarPuntosJugadores(int resultadoSimulado) {
+    private void actualizarPuntosJugadores(int puntos) {
         for (Jugador jugador : jugadores) {
-            jugador.setPuntos(jugador.getPuntos() + resultadoSimulado);
+            jugador.setPuntos(jugador.getPuntos() + puntos);
         }
     }
 
