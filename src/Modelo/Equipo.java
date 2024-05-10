@@ -241,14 +241,7 @@ public class Equipo implements Equipable {
 
     //////// metodos para Jugar un partido
 
-    private void mostrarResumenJugadores(LocalDate localDate) {
-        System.out.println("Resumen de puntos y faltas por jugador:");
-        for (Jugador jugador : jugadores) {
-            System.out.println("Nombre: " + jugador.getNombre() + ", Puntos " + jugador.getPuntos() + ", Faltas: "
-                    + jugador.getFaltas());
-        }
-
-    }
+   
 
     private void actualizarPuntosJugadores(int puntos, Jugador jugador) {
 
