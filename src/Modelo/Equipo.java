@@ -113,6 +113,8 @@ public class Equipo implements Equipable {
                     oficial.ganador();
                     System.out.println("Resumen de puntos y faltas por jugador:");
                     int puntosRestantes = p.getPuntos();
+
+                    //el for es para repartir los putos a jugador
                     for (int i = 0; i < getJugadores().size(); i++) {
                         Jugador jugador = getJugadores().get(i);
                         int faltas = (int) (Math.random() * 3);

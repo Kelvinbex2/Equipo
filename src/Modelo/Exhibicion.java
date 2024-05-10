@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Random;
 
 public class Exhibicion extends Partidos {
-    private boolean esLocal;
+
 
     public Exhibicion() {
     }
