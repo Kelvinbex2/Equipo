@@ -84,23 +84,13 @@ public class Equipo implements Equipable {
         if (op.equalsIgnoreCase("S")) {
             int valid = crearPartido();
             Partidos p = obtPartidos(valid);
-
             if (p != null && getJugadores().size() > 5) {
+                p = new Oficial(); 
                 System.out.println("¿Somos equipo local? (S/N)");
                 String op2 = Entrada.leerString();
-
                 if (op2.equalsIgnoreCase("S")) {
-                    // Validar el puntaje del partido para simulación local
-                    int resultadoSimulado = p.ganado();
-                    int puntosPartido = 0;
-                    actualizarPuntosJugadores(puntosPartido);
-                    if (puntosPartido >= 35 && puntosPartido <= 150 && p.isGanado()==true) {
-                        System.out.println("Resultado simulado del partido: " + resultadoSimulado);
-                        System.out.println("----------------");
-                        mostrarResumenJugadores(p.getFecha());
-                    } else {
-                        System.out.println("El puntaje del partido no es adecuado para simular como equipo local.");
-                    }
+                   
+                p.jugar();
                 } else if (p != null && getJugadores().size() > 5) {
 
                     System.out.println("Simulación como equipo visitante (a implementar).");
