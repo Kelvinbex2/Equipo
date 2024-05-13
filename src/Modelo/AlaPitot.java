@@ -3,12 +3,10 @@ package Modelo;
 public class AlaPitot extends Jugador {
     public static final String TIPO = "Ala-Pitot";
 
-    public AlaPitot(){
-        
+    public AlaPitot() {
+
     }
-
-
-    public AlaPitot(String nombre, int dorsal, int habilidad, int altura) {
+public AlaPitot(String nombre, int dorsal, int habilidad, int altura) {
         super(nombre, dorsal, habilidad, altura);
     }
 
